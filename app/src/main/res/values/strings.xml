@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">AI一括ペースト</string>
+    <string name="service_name">AI一括ペースト（フローティングボタン）</string>
+    <string name="service_description">画面上に「貼」ボタンを表示し、AIの出力を項目ごとに分けて、表示中のアプリの複数の入力欄へまとめて貼り付けます。入力欄の検出と文字入力のためだけに画面の内容を読み取ります。データを外部に送信することはありません。</string>
+</resources>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F4F5FA">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- ① 指示文 -->
+        <TextView style="@style/SectionTitle" android:text="① AIへの指示文を作る" />
+        <TextView style="@style/Note"
+            android:text="貼り付けたい入力欄の名前を順番に（カンマ区切りで）入力し、できた指示文をAIへの依頼に付け足してください。" />
+        <EditText
+            android:id="@+id/fieldNames"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="例：タイトル, 本文, タグ"
+            android:inputType="text" />
+        <TextView
+            android:id="@+id/promptPreview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="#FFFFFF"
+            android:padding="10dp"
+            android:textIsSelectable="true"
+            android:textSize="13sp" />
+        <Button
+            android:id="@+id/copyPrompt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="指示文をコピー" />
+
+        <!-- ② 読み込み -->
+        <TextView style="@style/SectionTitle" android:text="② AIの出力を読み込む" />
+        <TextView style="@style/Note"
+            android:text="AIの回答をまとめてコピーしてから下のボタンを押します（AIアプリの「共有」からこのアプリを選んでもOK）。" />
+        <Button
+            android:id="@+id/fromClipboard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="クリップボードから読み込む" />
+        <EditText
+            android:id="@+id/rawInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top"
+            android:hint="または、ここに直接貼り付け"
+            android:inputType="textMultiLine"
+            android:maxLines="8"
+            android:minLines="3" />
+        <Button
+            android:id="@+id/parse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="この内容で項目に分ける" />
+
+        <!-- ③ 結果 -->
+        <TextView
+            android:id="@+id/resultTitle"
+            style="@style/SectionTitle"
+            android:text="③ 分割された項目" />
+        <TextView style="@style/Note"
+            android:text="タップするとその項目だけをコピーできます。" />
+        <LinearLayout
+            android:id="@+id/itemList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+        <!-- ④ 貼り付け -->
+        <TextView style="@style/SectionTitle" android:text="④ 他のアプリに一括で貼り付ける" />
+        <TextView
+            android:id="@+id/serviceStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold" />
+        <Button
+            android:id="@+id/openSettings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ユーザー補助の設定を開く" />
+        <TextView style="@style/Note"
+            android:text="使い方：\n1. 設定の「ユーザー補助」→「インストール済みアプリ」→「AI一括ペースト」をオンにします。\n2. 画面に丸い「貼」ボタンが出ます（ドラッグで移動、長押しでこのアプリを開く）。\n3. 貼り付け先のアプリで「貼」を押すと、入力欄に番号が付き、各欄に入る項目が表示されます。\n4. ◀ ▶ で入れる項目を変更、または「スキップ」にします。\n5. 「一括貼り付け」で全欄にまとめて入力されます。\n「選択中の欄に次を貼る」は、カーソルのある欄に1件ずつ入れていくモードです。" />
+    </LinearLayout>
+</ScrollView>
