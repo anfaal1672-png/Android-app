@@ -11,15 +11,9 @@
         android:padding="16dp">
 
         <!-- ① 指示文 -->
-        <TextView style="@style/SectionTitle" android:text="① AIへの指示文を作る" />
+        <TextView style="@style/SectionTitle" android:text="① AIへの指示文" />
         <TextView style="@style/Note"
-            android:text="貼り付けたい入力欄の名前を順番に（カンマ区切りで）入力し、できた指示文をAIへの依頼に付け足してください。" />
-        <EditText
-            android:id="@+id/fieldNames"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="例：タイトル, 本文, タグ"
-            android:inputType="text" />
+            android:text="この指示文をコピーし、末尾の「＃依頼」の後に頼みたいことを書いてAIに送ってください。" />
         <TextView
             android:id="@+id/promptPreview"
             android:layout_width="match_parent"

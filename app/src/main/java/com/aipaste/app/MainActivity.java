@@ -9,9 +9,7 @@ import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.text.Editable;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.EditText;
@@ -23,7 +21,6 @@ import java.util.List;
 
 public class MainActivity extends Activity {
 
-    private EditText fieldNames;
     private TextView promptPreview;
     private EditText rawInput;
     private TextView resultTitle;
@@ -36,24 +33,13 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        fieldNames = findViewById(R.id.fieldNames);
         promptPreview = findViewById(R.id.promptPreview);
         rawInput = findViewById(R.id.rawInput);
         resultTitle = findViewById(R.id.resultTitle);
         itemList = findViewById(R.id.itemList);
         serviceStatus = findViewById(R.id.serviceStatus);
 
-        fieldNames.setText(Items.prefs(this).getString("fieldNames", ""));
-        fieldNames.addTextChangedListener(new TextWatcher() {
-            @Override public void beforeTextChanged(CharSequence s, int a, int b, int c) {}
-            @Override public void onTextChanged(CharSequence s, int a, int b, int c) {}
-            @Override public void afterTextChanged(Editable s) {
-                Items.prefs(MainActivity.this).edit().putString("fieldNames", s.toString()).apply();
-                updatePrompt();
-            }
-        });
-        updatePrompt();
-
+        promptPreview.setText(Items.PROMPT);
         findViewById(R.id.copyPrompt).setOnClickListener(v -> {
             copy("指示文", promptPreview.getText().toString());
             toast("指示文をコピーしました");
@@ -166,10 +152,6 @@ public class MainActivity extends Activity {
             });
             itemList.addView(card);
         }
-    }
-
-    private void updatePrompt() {
-        promptPreview.setText(Items.buildPrompt(fieldNames.getText().toString()));
     }
 
     private String readClipboard() {

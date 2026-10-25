@@ -113,27 +113,29 @@ public final class Items {
         return false;
     }
 
-    public static String buildPrompt(String fieldNames) {
-        List<String> names = new ArrayList<>();
-        for (String n : fieldNames.split("[,、，\\n]")) {
-            if (!n.trim().isEmpty()) names.add(n.trim());
-        }
-        StringBuilder sb = new StringBuilder();
-        sb.append("【出力形式の指定】\n");
-        sb.append("回答は必ず次の形式だけで出力してください。\n");
-        sb.append("・各項目は、行の先頭に【項目名】だけを書いた行で始め、次の行から内容を書く\n");
-        sb.append("・前置き、説明、まとめ、コードブロック、Markdownの装飾は一切書かない\n");
-        sb.append("・内容の中では【】を使わない\n");
-        if (!names.isEmpty()) {
-            sb.append("・項目は次の順番で、すべて出力する：");
-            for (String n : names) sb.append('【').append(n).append('】');
-            sb.append("\n\n出力例：\n");
-            for (String n : names) sb.append('【').append(n).append("】\n（").append(n).append("の内容）\n");
-        } else {
-            sb.append("\n出力例：\n【項目1】\n（内容）\n【項目2】\n（内容）\n");
-        }
-        return sb.toString();
-    }
+    /** AI への依頼に付け足す、出力形式の指示文。 */
+    public static final String PROMPT =
+            "この後の依頼への回答は、入力フォームの各欄に項目ごとに貼り付けて使います。次のルールを必ず守って出力してください。\n"
+            + "\n"
+            + "＃出力ルール\n"
+            + "・各項目は、行頭に【項目名】だけを書いた行で始め、次の行から内容を書く\n"
+            + "・項目は、貼り付ける入力欄の上から順に並べる\n"
+            + "・項目名は、入力欄の名前がわかる場合はそれと同じにする\n"
+            + "・内容はそのまま貼れる完成した文章にする（「ここに〇〇を入れる」などの説明や仮の文字は書かない）\n"
+            + "・回答は【】で始まる項目だけにする。前置き・補足・締めの言葉は書かない\n"
+            + "・コードブロック（```）や **、# などの装飾記号は使わない（改行はOK）\n"
+            + "・内容の中では【】を使わない\n"
+            + "\n"
+            + "＃出力例\n"
+            + "【タイトル】\n"
+            + "秋限定 さつまいもモンブラン\n"
+            + "【本文】\n"
+            + "今年も秋限定のモンブランが登場しました。\n"
+            + "なめらかなさつまいもクリームをたっぷり使っています。\n"
+            + "【タグ】\n"
+            + "#モンブラン #秋スイーツ #期間限定\n"
+            + "\n"
+            + "＃依頼\n";
 
     public static void save(Context ctx, List<Item> items) {
         JSONArray arr = new JSONArray();
